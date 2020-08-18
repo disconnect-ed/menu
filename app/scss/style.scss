@@ -1,0 +1,348 @@
+@import "vars";
+@import "libs";
+@import "fonts";
+
+//scss использовал первый раз (обычно использовал синтаксис sass)
+
+body {
+  font-family: open-reg, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: open-bold, sans-serif;
+}
+
+button {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}
+
+header {
+  position: relative;
+}
+
+nav {
+  background-color: white;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  box-shadow: 0 5px 5px -5px rgba(0, 0, 0, .5);
+  &:after {
+    content: '';
+    z-index: -10;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    transition: all 0.3s ease;
+  }
+}
+
+.menu-bg_active {
+  &:after {
+    background-color: rgba(0,0,0,0.5) !important;
+  }
+
+}
+
+.btn_active {
+  background-image: url("../img/up.svg") !important;
+  border-left: transparent !important;
+}
+
+.btn {
+  position: absolute;
+  right: 5px;
+  top: 0;
+  background-image: url("../img/down.svg");
+  background-size: 50%;
+  border-left: 2px solid #D9D9D9;
+  height: 40px;
+  width: 40px;
+  display: none;
+  transition: all 0.5s ease;
+}
+
+.link {
+  transition: all 0.2s ease;
+  text-decoration: none;
+  &:hover {
+    color: orangered;
+  }
+}
+
+.lock {
+  overflow: hidden;
+}
+
+//===================================
+
+.menu {
+  padding: 0;
+  position: relative;
+  margin: 0;
+  list-style: none;
+  height: 50px;
+  display: flex;
+  width: 80%;
+  &-bg {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    transition: all 0.3s ease;
+    z-index: -10;
+  }
+}
+.menu-item {
+  transition: all 0.2s ease;
+  line-height: 50px;
+  border-bottom: 4px solid transparent;
+  box-sizing: border-box;
+  margin-right: 50px;
+  &__link {
+    text-decoration: none;
+    color: black;
+    line-height: 50px;
+    position: relative;
+    display: block;
+  }
+
+}
+
+.menu-section {
+  top: 50px;
+  width: 100%;
+  background-color: white !important;
+  position: absolute;
+  left: -150%;
+  display: flex;
+  opacity: 0;
+  transition: all 0.7s ease;
+  padding: 0 25px;
+  padding-bottom: 25px;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  &__item {
+    width: 16.6%;
+  }
+  &__link {
+    margin: 0;
+    font-size: 18px;
+    line-height: 30px;
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+  }
+}
+
+
+.menu-list {
+  box-sizing: border-box;
+  padding: 0;
+  list-style: none;
+  &__item {
+    line-height: 30px !important;
+    a {
+      font-size: 14px;
+      margin: 0;
+      line-height: 30px;
+      text-decoration: none;
+      color: black;
+    }
+  }
+}
+
+//=======================================
+//burger
+
+.menu_link {
+  width: 50px;
+  height: 50px;
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 999;
+}
+
+.cross, .cross::before, .cross::after {
+  display: block;
+  height: 2px;
+  width: 20px;
+  background-color: #000;
+  position: absolute;
+  left: calc(50% - 10px);
+  top: calc(50% - 1px);
+  content: "";
+  transition: all 0.3s ease;
+}
+
+.cross::before {
+  margin-top: -7px;
+}
+
+.cross::after {
+  margin-top: 7px;
+}
+
+.menu_link-active .cross{
+  background-color: transparent;
+}
+
+.menu_link-active .cross::before {
+  transform: rotate(135deg);
+  margin-top: 0;
+  background-color: orangered;
+}
+
+.menu_link-active .cross::after {
+  transform: rotate(-135deg);
+  margin-top: 0;
+  background-color: orangered;
+}
+
+//burger
+//=======================================
+
+
+.menu_open {
+  top: 50px !important;
+  opacity: 1 !important;
+}
+
+.menu__active {
+  display: block !important;
+  opacity: 1 !important;
+  height: unset !important;
+}
+
+.menu-list_active {
+  display: block !important;
+}
+
+@media screen and (min-width: 1367px) {
+  .menu-item:hover .menu-section {
+    left: 0 !important;
+    opacity: 1 !important;
+
+
+  }
+
+  .menu-item:nth-child(2):hover~.menu-bg,
+  .menu-item:nth-child(4):hover~.menu-bg {
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  //.menu-item:hover~.menu-bg {
+  //  background-color: rgba(0,0,0,0.5);
+  //}
+
+  .menu-item {
+    &:hover {
+      border-bottom: 4px solid orangered;
+    }
+  }
+}
+
+@media screen and (max-width: 1366px) {
+
+  .menu_link {
+    display: block;
+  }
+
+
+  .btn {
+    display: block;
+  }
+
+  a.link {
+    font-size: 16px ;
+    padding-left: 25px;
+    line-height: 50px !important;
+  }
+
+  .menu {
+    //padding-left: 25px;
+    position: fixed;
+    display: block;
+    top: -100%;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: white;
+    overflow-y: scroll;
+    opacity: 0;
+    height: unset;
+    max-height: calc(100vh - 50px) !important;
+    transition: all 0.5s ease;
+
+  }
+
+
+
+  .menu-item {
+    position: relative;
+    border-bottom: none;
+    margin-right: 0;
+    &__link {
+      display: inline-block;
+    }
+
+  }
+
+  .menu-section {
+    display: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+    height: 0;
+    background-color: #F7F7F7 !important;
+    &__item {
+      position: relative;
+      width: 100%;
+
+    }
+    &__link {
+      margin-left: 15px;
+    }
+
+    &__button {
+      display: block;
+
+    }
+    position: unset;
+    flex-direction: column;
+    padding: 0;
+    &__title {
+      font-size: 15px;
+    }
+  }
+
+  .menu-list {
+    display: none;
+    &__item {
+      margin-left: 30px;
+    }
+  }
+
+}
+
+
+
+
+@import "media";
